@@ -11,6 +11,10 @@ export default function Home() {
       </h1>
         </main>
       </div>
+      <div className="bg-red-500 text-white p-4 text-center">
+  Tailwind is working 🎉
+</div>
+
     </>
   );
 }

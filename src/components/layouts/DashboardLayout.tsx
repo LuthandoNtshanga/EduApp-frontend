@@ -46,7 +46,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             <li>
               <button
                 onClick={handleLogout}
-                className="w-full text-left px-3 py-2 rounded hover:bg-blue-700 transition-colors duration-150"
+                className="btn btn-secondary w-full text-left"
               >
                 Logout
               </button>

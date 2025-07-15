@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAuth } from "@/context/AuthContext";
@@ -15,33 +15,39 @@ const navLinks = [
 const Navbar: React.FC = () => {
   const router = useRouter();
   const { user, logout } = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleBurgerClick = () => setMenuOpen((open) => !open);
+  const handleNavLinkClick = () => setMenuOpen(false);
 
   return (
-    <nav className="bg-gray-800 text-white px-6 py-4 flex items-center space-x-6">
-      {navLinks.map(({ href, label }) => (
-        <Link
-          key={href}
-          href={href}
-          className={`hover:text-blue-400 ${
-            router.pathname === href ? 'font-bold underline' : ''
-          }`}
-        >
-          {label}
-        </Link>
-      ))}
-      {user?.role === "admin" && (
-        <Link href="/admin" className="hover:text-blue-400">Admin</Link>
-      )}
-      <div className="ml-auto">
-        {user ? (
-          <button
-            onClick={logout}
-            className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 transition"
+    <nav className={`navbar${menuOpen ? ' active' : ''}`}> 
+      <div className="logo">EduApp</div>
+      <div className="burger" onClick={handleBurgerClick} aria-label="Toggle navigation" tabIndex={0} role="button">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div className="nav-links">
+        {navLinks.map(({ href, label }) => (
+          <Link
+            key={href}
+            href={href}
+            className={router.pathname === href ? 'active' : ''}
+            onClick={handleNavLinkClick}
           >
+            {label}
+          </Link>
+        ))}
+        {user ? (
+          <span className="user-email">{user.email}</span>
+        ) : null}
+        {user ? (
+          <button onClick={() => { logout(); setMenuOpen(false); }} className="btn btn-primary" style={{ marginLeft: '1rem' }}>
             Logout
           </button>
         ) : (
-          <Link href="/login" className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 transition">
+          <Link href="/login" className="btn btn-primary" style={{ marginLeft: '1rem' }} onClick={handleNavLinkClick}>
             Sign In
           </Link>
         )}

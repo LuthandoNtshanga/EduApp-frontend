@@ -64,7 +64,7 @@ const ChatBox: React.FC = () => {
       <form onSubmit={handleSend} className="flex items-center space-x-2">
         <input
           type="text"
-          className="flex-1 border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="input"
           placeholder="Type your message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -72,7 +72,7 @@ const ChatBox: React.FC = () => {
         />
         <button
           type="submit"
-          className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded transition-colors duration-150"
+          className="btn btn-primary"
           disabled={loading || !input.trim()}
         >
           Send

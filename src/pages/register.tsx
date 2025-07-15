@@ -33,38 +33,61 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <form onSubmit={handleRegister} className="bg-white p-6 rounded shadow-md w-96">
-        <h2 className="text-2xl mb-4 font-bold text-blue-900">Register</h2>
-        <input
-          name="name"
-          type="text"
-          placeholder="Name"
-          className="w-full p-2 mb-4 border rounded"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          className="w-full p-2 mb-4 border rounded"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 mb-4 border rounded"
-          value={form.password}
-          onChange={handleChange}
-          required
-        />
-        <button className="bg-blue-600 text-white w-full p-2 rounded">Register</button>
-        {message && <p className="mt-4 text-sm text-red-500">{message}</p>}
+    <div className="login-container">
+      <form onSubmit={handleRegister} className="card login-form">
+        <h2 className="login-title">Register</h2>
+        <div className="form-group">
+          <label htmlFor="name" className="form-label">Name</label>
+          <div className="input-icon-group">
+            <span className="input-icon">👤</span>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Name"
+              className="input"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="email" className="form-label">Email</label>
+          <div className="input-icon-group">
+            <span className="input-icon">📧</span>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Email"
+              className="input"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="password" className="form-label">Password</label>
+          <div className="input-icon-group">
+            <span className="input-icon">🔒</span>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Password"
+              className="input"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+        <button className="btn btn-primary login-btn" type="submit">
+          <span className="btn-icon">📝</span> Register
+        </button>
+        {message && <p className="form-error" style={{ textAlign: 'center' }}>{message}</p>}
       </form>
     </div>
   );

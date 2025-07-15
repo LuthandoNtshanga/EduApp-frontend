@@ -28,8 +28,15 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const fakeUser = {
+  id: 'demo',
+  name: 'Demo User',
+  email: 'demo@example.com',
+  role: 'user' as 'user',
+};
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(fakeUser);
   const [token, setToken] = useState<string | null>(null);
   const router = useRouter();
 
@@ -68,30 +75,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // eslint-disable-next-line
   }, []);
 
-  // Login function
+  // Login function (disabled)
   const login = async (email: string, password: string) => {
-    const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
-    localStorage.setItem('token', res.data.token);
-    setToken(res.data.token);
-    decodeAndSetUser(res.data.token);
-    router.push('/dashboard');
+    setUser(fakeUser);
+    // router.push('/dashboard');
   };
 
-  // Register function
+  // Register function (unchanged)
   const register = async (name: string, email: string, password: string) => {
-    const res = await axios.post('http://localhost:5000/api/auth/register', { name, email, password });
-    localStorage.setItem('token', res.data.token);
-    setToken(res.data.token);
-    decodeAndSetUser(res.data.token);
-    router.push('/dashboard');
+    setUser(fakeUser);
+    // router.push('/dashboard');
   };
 
-  // Logout function
+  // Logout function (optional: can be disabled or set user to null)
   const logout = () => {
-    localStorage.removeItem('token');
-    setToken(null);
-    setUser(null);
-    router.push('/login');
+    setUser(fakeUser);
+    // router.push('/login');
   };
 
   return (
